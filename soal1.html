@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADITYA NUGROHO</title>
+</head>
+<body>
+    <h1>SOAL NOMOR 1 </h1>
+    <P>Hitung var4 Kata "SIAPA"</P>
+    <p>Masukkan kata di bawah ini:</p>
+    <textarea id="kataInput" rows="4" cols="50" > USOMAANAPAIUMASYDNIP</textarea>
+    <br>
+    <h1>KLIK HITUNG </h1>
+   <H1> <button onclick="hitung()">Hitung</button></H1>
+    <p id="hasil"></p>
+
+    <script>
+        function adityaN(kata) {
+            var kataTarget = "SIAPA";
+            var var1 = {};
+
+            // Menghitung jumlah kemunculan setiap huruf dalam kata 'SIAPA'
+            for (var i = 0; i < kataTarget.length; i++) {
+                var adt = kataTarget[i];
+                if (var1[adt] === undefined) {
+                    var1[adt] = 1;
+                } else {
+                    var1[adt]++;
+                }
+            }
+
+            // Menghitung jumlah kemunculan setiap huruf dalam kata
+            var var2 = {};
+            for (var j = 0; j < kata.length; j++) {
+                var var2Ini = kata[j];
+                if (var2[var2Ini] === undefined) {
+                    var2[var2Ini] = 1;
+                } else {
+                    var2[var2Ini]++;
+                }
+            }
+
+            var minvar4 = Infinity;
+            for (var huruf in var1) {
+                if (var2[huruf] === undefined) {
+                    return 0;
+                }
+                var var4 = Math.floor(var2[huruf] / var1[huruf]);
+                if (var4 < minvar4) {
+                    minvar4 = var4;
+                }
+            }
+
+            return minvar4;
+        }
+
+        function hitung() {
+            var kata = document.getElementById("kataInput").value.toUpperCase();
+            var var3 = adityaN(kata);
+            document.getElementById("hasil").innerHTML = "Dari kata '" + kata + "', kata 'SIAPA' bisa dibuat sebanyak " + var3 + " kali.";
+        }
+    </script>
+</body>
+</html>

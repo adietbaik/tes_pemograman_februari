@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filter Data data_master</title>
+</head>
+<body>
+    <h1>SOAL 2 </h1>
+   
+    <button onclick="reloadPage()">Reload Page</button>
+
+    <input type="hidden" id="nimFilter">
+    <div id="container"></div>
+
+
+    <h1>KLIK jawab </h1>
+    <H1> <button onclick="filterData()">JAWAB </button></H1>
+   
+    <h3>JAWABAN BY QUERY SQL</h3>
+<P>NO.2A</P>
+<P>select tanggal,nim from table_SOAL where tanggal in ('15 juni 2020','18 juni 2020')</P>
+<P>NO.2B</P>
+
+<P>select t.nim,t.nama,count(s.tanggal) as kehadiran from table_orang t left join </P>
+<P>table_SOAL s on t.nim = s.nim group by t.nim,t.nama</P>
+  
+    <script>
+        function reloadPage() {
+            location.reload(); 
+        }
+    </script>
+
+    <script>
+        var data_master = [
+            { tanggal : '15 juni 20', nim: 'A001' },
+            { tanggal : '18 juni 20', nim: 'A003' },
+            { tanggal : '16 juni 20', nim: 'A001' },
+            { tanggal : '15 juni 20', nim: 'A002' },
+            { tanggal : '17 juni 20', nim: 'A001' },
+            { tanggal : '17 juni 20', nim: 'A002' },
+            { tanggal : '15 juni 20', nim: 'A003' },
+            { tanggal : '16 juni 20', nim: 'A002' },
+            { tanggal : '17 juni 20', nim: 'A004' },
+            { tanggal : '16 juni 20', nim: 'A003' }
+
+        ];
+
+     
+        function buatTabel(data) {
+            var html = '<table border="1">';
+         
+            html += '<tr><th>Tanggal</th><th>NIM</th>';
+         
+            for (var i = 0; i < data.length; i++) {
+                html += '<tr>';
+                html += '<td>' + data[i].tanggal + '</td>';
+                html += '<td>' + data[i].nim + '</td>';
+               
+                html += '</tr>';
+            }
+            html += '</table>';
+            return html;
+        }
+
+      
+        function tampilkanTabel(data) {
+            document.getElementById('container').innerHTML = buatTabel(data);
+        }
+
+      
+        function filterData() {
+            var inputFilter = document.getElementById('nimFilter').value.trim().toLowerCase();
+            var filteredData = [];
+         
+            for (var i = 0; i < data_master.length; i++) {
+                if (data_master[i].tanggal.toLowerCase().includes('15 juni 20') || data_master[i].tanggal.toLowerCase().includes('18 juni 20')) {
+                    filteredData.push(data_master[i]);
+                }
+            }
+         
+            tampilkanTabel(filteredData);
+        }
+
+       
+        window.onload = function() {
+            tampilkanTabel(data_master);
+        };
+    </script>
+</body>
+</html>
